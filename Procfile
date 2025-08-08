@@ -1,1 +1,1 @@
-web: uvicorn hackrx_rag_system:app --host 0.0.0.0 --port $PORT
+web: python hackrx_rag_system.py
