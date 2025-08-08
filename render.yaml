@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: hackrx-6-rag-system
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python hackrx_rag_system.py
+    plan: free
+    pythonVersion: "3.11.9"
