@@ -130,7 +130,7 @@ def test_webhook_format():
 
 if __name__ == "__main__":
     print("🚀 Starting HackRx 6.0 RAG System Tests")
-    print("⚠️  Make sure RAG server is running: python hackrx_rag_system.py")
+    print("⚠️  Make sure RAG server is running: python app.py")
     print()
     
     # Run RAG system tests
