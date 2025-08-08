@@ -9,7 +9,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 from typing import List, Dict, Any
 import asyncio
-import aiohttp
+import requests
 import re
 import json
 import logging
@@ -90,15 +90,14 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
 async def download_document(url: str) -> str:
     """Download and process document"""
     try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url, timeout=30) as response:
-                if response.status == 200:
-                    content = await response.read()
-                    logger.info(f"Document downloaded: {len(content)} bytes")
-                    return f"Document processed successfully from {url}"
-                else:
-                    logger.warning(f"Document download failed: {response.status}")
-                    return "Document processing completed"
+        response = requests.get(url, timeout=30)
+        if response.status_code == 200:
+            content = response.content
+            logger.info(f"Document downloaded: {len(content)} bytes")
+            return f"Document processed successfully from {url}"
+        else:
+            logger.warning(f"Document download failed: {response.status_code}")
+            return "Document processing completed"
     except Exception as e:
         logger.error(f"Document download error: {e}")
         return "Document processed with fallback method"
