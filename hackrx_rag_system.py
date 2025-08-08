@@ -230,7 +230,9 @@ async def rag_statistics():
 
 if __name__ == "__main__":
     import uvicorn
+    import os
+    port = int(os.environ.get("PORT", 8000))
     print("🚀 HackRx 6.0 - RAG System Starting...")
     print("🏆 Retrieval-Augmented Generation Architecture")
     print("📚 Knowledge Base Loaded:", len(KNOWLEDGE_BASE), "entries")
-    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
+    uvicorn.run(app, host="0.0.0.0", port=port, log_level="info")
