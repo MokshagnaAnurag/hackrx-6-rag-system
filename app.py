@@ -183,6 +183,7 @@ def process_query_with_rag(query, document_content):
     return answer
 
 @app.route('/hackrx/run', methods=['POST'])
+@app.route('/api/v1/hackrx/run', methods=['POST'])
 def process_queries():
     """Main endpoint: Process document queries with RAG"""
     if not verify_token():
@@ -227,9 +228,13 @@ def health_check():
         "ready": True
     })
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def root():
-    """Root endpoint"""
+    """Root endpoint - also handles POST requests"""
+    if request.method == 'POST':
+        # Redirect POST requests to main processing
+        return process_queries()
+    
     return jsonify({
         "message": "HackRx 6.0 - RAG-Powered Intelligent Query System",
         "version": "1.0.0",
