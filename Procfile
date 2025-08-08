@@ -1,1 +1,1 @@
-web: python hackrx_rag_system.py
+web: python app.py
